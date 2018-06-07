@@ -1,4 +1,4 @@
-
+//import com.jcabi.aspects.Loggable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.*;
 import org.testng.annotations.Test;
 
 @Aspect
+//@Loggable
 public class AspectLogger {
     public static Logger LOG = LogManager.getLogger(AspectLogger.class);
 
@@ -15,13 +16,17 @@ public class AspectLogger {
     }
 
     //@Pointcut("@annotation(org.testng.annotations.Test)")
-    @Pointcut("execution(public * *(..))")
+    //@Pointcut("execution(public * *(..))")
+    //@Pointcut("execution(* org.testng.internal.IInvoker.invokeTestMethods(..))")
+    @Pointcut("execution(* *(..)) && @annotation(org.testng.annotations.Test)")
     public void selectAllTests() {
     }
 
     @Before(value = "selectAllTests()")
     public void before(JoinPoint jp) {
+        System.out.println(jp.getSignature().getName() + "() method has been called ");
         LOG.info(jp.getSignature().getName() + "() method has been called ");
+        LOG.info("tra-ta-ta");
     }
 }
 

@@ -19,7 +19,7 @@ public class OurLitleTest {
         Configuration.openBrowserTimeoutMs = 25000;
     }
 
-    @Test
+    //@Test
     public void test() {
         MainHeader mh = open("http://potolkoff58.ru/", MainHeader.class);
         mh

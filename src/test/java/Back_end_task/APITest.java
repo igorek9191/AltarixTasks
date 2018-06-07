@@ -1,14 +1,10 @@
 package Back_end_task;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+//import com.jcabi.aspects.Loggable;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -16,14 +12,11 @@ import static org.hamcrest.core.IsEqual.equalTo;
 /**
  * Created by IVlasyuk on 22.04.2018.
  */
-//@Loggable(limit = 5, unit = TimeUnit.MILLISECONDS)
-
+//@Loggable
 public class APITest {
 
     String basketName = "igorek3465";
     String token = null;
-
-    //private final static Logger LOG = LogManager.getLogger(APITest.class);
 
     @Test
     public void test() {
