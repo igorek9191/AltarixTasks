@@ -1,4 +1,4 @@
-package Back_end_task;
+package Back_end_task.REST;
 
 //import com.jcabi.aspects.Loggable;
 import org.testng.annotations.Test;

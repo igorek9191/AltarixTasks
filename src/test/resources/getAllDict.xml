@@ -1,0 +1,6 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ehd="http://ehd.mos.com/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ehd:getAllDict/>
+    </soapenv:Body>
+</soapenv:Envelope>

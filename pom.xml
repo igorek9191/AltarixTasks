@@ -95,11 +95,11 @@
             <version>${aspectj.version}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>MyTraining</groupId>
             <artifactId>project</artifactId>
              <version>1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
@@ -129,17 +129,18 @@
                     <verbose>true</verbose>
                     <Xlint>ignore</Xlint>
                     <encoding>UTF-8 </encoding>
-                    <aspectLibraries>
+                    <!--<aspectLibraries>
                         <aspectLibrary>
                             <groupId>MyTraining</groupId>
                             <artifactId>project</artifactId>
                         </aspectLibrary>
-                    </aspectLibraries>
+                    </aspectLibraries>-->
                     <complianceLevel>1.8</complianceLevel>
                 </configuration>
                 <executions>
                     <execution>
                         <phase>process-test-classes</phase>
+                        <!--<phase>process-sources</phase>-->
                         <goals>
                             <!-- use this goal to weave all your main classes -->
                             <!--<goal>compile</goal>-->
