@@ -26,5 +26,6 @@ nbdist/
 mvnw.cmd
 mvnw
 .mvn/
+*.log
 log/*
 *.patch
