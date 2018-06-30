@@ -2,15 +2,25 @@
 <Configuration status="INFO">
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight{[%-5level]} %logger{36} - %msg%n" />
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight{[%-5level]} %c{1} \t %msg%n" />
         </Console>
         <File name="MyFile" fileName="all.log" immediateFlush="false" append="false">
-            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"/>
+            <PatternLayout charset="UTF-8" pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%-5level] \t %msg%n%rThrowable{filters(
+            org.apache.maven,
+            org.testng,
+            sun.reflect,
+            com.jayway,
+            java.lang,
+            org.codehaus,
+            io.restassured.internal.ResponseSpecificationImpl,
+            io.restassured.specification,
+            io.restassured.internal
+            )}"/>
         </File>
     </Appenders>
     <Loggers>
         <Root level="info">
-            <AppenderRef ref="Console" />
+            <!--<AppenderRef ref="Console" />-->
             <AppenderRef ref="MyFile"/>
         </Root>
     </Loggers>
