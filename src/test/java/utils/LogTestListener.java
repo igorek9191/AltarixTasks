@@ -1,13 +1,10 @@
 package utils;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.*;
 import org.testng.annotations.Listeners;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.lang.annotation.Annotation;
 import java.util.List;
 
@@ -85,7 +82,7 @@ public class LogTestListener implements ITestListener, IInvokedMethodListener {
     // This belongs to IInvokedMethodListener and will execute before every method including @Before @After @Test
     public void beforeInvocation(IInvokedMethod method, ITestResult result) {
         if(method.getTestMethod().isBeforeClassConfiguration()) LOG.info("Before method of class " + result.getInstanceName());
-        LOG.info("==> METHOD : " + returnMethodName(method.getTestMethod()));
+        LOG.info("--> TEST METHOD : " + returnMethodName(method.getTestMethod()));
     }
 
     // This belongs to IInvokedMethodListener and will execute after every method including @Before @After @Test
@@ -95,12 +92,12 @@ public class LogTestListener implements ITestListener, IInvokedMethodListener {
         PrintWriter writer = new PrintWriter(sw);
         throwable.printStackTrace(writer);*/
 
-        if(result.getStatus() == 1) LOG.info("<== METHOD " + returnMethodName(method.getTestMethod()) + " finished successfully");
+        if(result.getStatus() == 1) LOG.info("<-- TEST METHOD " + returnMethodName(method.getTestMethod()) + " finished successfully");
         if(result.getStatus() == 2) {
-            LOG.error("<== METHOD " + returnMethodName(method.getTestMethod()) + " finished unsuccessfully");
+            LOG.error("<-- TEST METHOD " + returnMethodName(method.getTestMethod()) + " finished unsuccessfully");
             LOG.throwing(throwable);
         }
-        if(result.getStatus() == 3) LOG.error("<== METHOD " + returnMethodName(method.getTestMethod()) + " was skipped");
+        if(result.getStatus() == 3) LOG.error("<-- TEST  METHOD " + returnMethodName(method.getTestMethod()) + " was skipped");
         for(String s : result.getAttributeNames()) System.out.println(s);
     }
 

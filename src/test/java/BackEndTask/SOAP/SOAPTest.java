@@ -27,7 +27,7 @@ public class SOAPTest {
     }
 
     @Test
-    public void soapTest() throws IOException {
+    public void checkGetAllDictMethod() throws IOException {
 
         String pathToEachDictionary = "Envelope.Body.getAllDictResponse.ehdDictionaries.ehdDictionary";
 
@@ -51,8 +51,8 @@ public class SOAPTest {
         List<String> myList = Arrays.asList("60", "61", "89", "1118", "1119", "1120", "2270");
 
         assertEquals(assertionList, myList, "Assertion of two lists");
-        for (Object o : xmlPath.getList(pathToEachDictionary))
-            System.out.println(o.toString());
+        /*for (Object o : xmlPath.getList(pathToEachDictionary))
+            System.out.println(o.toString());*/
 
     }
 

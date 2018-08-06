@@ -55,12 +55,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>25.0-jre</version>
-        </dependency>
-
         <!-- API для логгирования через slf4j-->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -88,6 +82,12 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>${aspectj.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.197</version>
         </dependency>
 
     </dependencies>

@@ -1,16 +1,24 @@
 package BackEndTask.REST.Countries;
 
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.path.json.config.JsonPathConfig;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.AllureRestAssured;
+import utils.DBmethods;
 import utils.LogTestListener;
 
-import java.util.List;
+import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static utils.DBmethods.getColumnValueFromCountries;
+import static utils.DBmethods.getCountryByCallingCode;
 
 @Listeners(LogTestListener.class)
 public class RESTTest {
@@ -20,17 +28,85 @@ public class RESTTest {
         RestAssured.filters(new AllureRestAssured());
     }
 
-    String allCountries = "https://restcountries.eu/rest/v2/all";
-    String listOfCodes = "https://restcountries.eu/rest/v2/alpha?codes=col;no;ee";
+    @Test
+    public void compareGermanyCountryCodes() throws SQLException {
+
+        String restResult = given()
+            .contentType("application/json; charset=UTF-8")
+            .get("https://restcountries.eu/rest/v2/name/Germany")
+            .then()
+            .assertThat().body(not(nullValue()))
+            .extract().path("[0].alpha3Code");
+
+        String dbResult = getColumnValueFromCountries("Code", "Germany");
+
+        assertEquals(restResult, dbResult);
+
+    }
 
     @Test
-    public void getAllCountries() {
-        List<String> s = given()
-            .contentType("application/json; charset=UTF-8")
-            .get(listOfCodes)
-            .then()
-            .extract().jsonPath(new JsonPathConfig("name.topLevelDomain"));
-        for(String a : s) System.out.println(a);
+    public void compareUKCountryCodes() throws SQLException {
+
+        String restResult = given()
+                .contentType("application/json; charset=UTF-8")
+                .get("https://restcountries.eu/rest/v2/name/United Kingdom")
+                .then()
+                .assertThat().body(not(nullValue()))
+                .extract().path("[0].alpha3Code");
+
+        String dbResult = getColumnValueFromCountries("Code", "United Kingdom");
+
+        assertEquals(restResult, dbResult);
+
     }
+
+    @Test
+    public void compareGermanyCallingCode() throws SQLException {
+
+        String restResult = given()
+                .contentType("application/json; charset=UTF-8")
+                .get("https://restcountries.eu/rest/v2/name/Germany")
+                .then()
+                .assertThat().body(not(nullValue()))
+                .extract().path("[0].callingCodes[0]");
+
+        String dbResult = getColumnValueFromCountries("Calling_Code", "Germany");
+
+        assertEquals(restResult, dbResult);
+
+    }
+
+    @Test
+    public void compareUKCallingCode() throws SQLException {
+
+        String restResult = given()
+                .contentType("application/json; charset=UTF-8")
+                .get("https://restcountries.eu/rest/v2/name/United Kingdom")
+                .then()
+                .assertThat().body(not(nullValue()))
+                .extract().path("[0].callingCodes[0]");
+
+        String dbResult = getColumnValueFromCountries("Calling_Code", "United Kingdom");
+
+        assertEquals(restResult, dbResult);
+
+    }
+
+    @Test
+    public void compareCountryNamesByCallingCode() throws SQLException {
+
+        String restResult = given()
+                .contentType("application/json; charset=UTF-8")
+                .get("https://restcountries.eu/rest/v2/callingcode/49")
+                .then()
+                .assertThat().body(not(nullValue()))
+                .extract().path("[0].name");
+
+        String dbResult = getCountryByCallingCode(49);
+
+        assertEquals(restResult, dbResult);
+
+    }
+
 
 }
